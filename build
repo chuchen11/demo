@@ -1,0 +1,21 @@
+#!/bin/bash
+export CC_PATH=/clang/12.0.5/bin
+export PATH=${CC_PATH}:$PATH
+export ARCH=arm64
+export SUBARCH=arm64
+export CROSS_COMPILE=aarch64-linux-gnu-
+export CROSS_COMPILE_COMPAT=arm-linux-gnueabi-
+export kk="-j$(nproc --all) \
+CC=${CC_PATH}/clang \
+HOSTCC=${CC_PATH}/clang \
+HOSTCXX=${CC_PATH}/clang++ \
+LD=${CC_PATH}/ld.lld \
+AR=${CC_PATH}/llvm-ar \
+NM=${CC_PATH}/llvm-nm \
+OBJCOPY=${CC_PATH}/llvm-objcopy \
+OBJDUMP=${CC_PATH}/llvm-objdump \
+READELF=${CC_PATH}/llvm-readelf \
+OBJSIZE=${CC_PATH}/llvm-size \
+STRIP=${CC_PATH}/llvm-strip"
+make ${kk} gki_defconfig O=out
+make ${kk} O=out
